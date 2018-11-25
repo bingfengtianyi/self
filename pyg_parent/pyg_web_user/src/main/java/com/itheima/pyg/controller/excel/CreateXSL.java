@@ -24,7 +24,7 @@ public class CreateXSL {
     @RequestMapping("exportexcel")
     public void exportexcel(HttpServletResponse response) {
         List<User> userList = userService.getUserList();
-        String[] columnNames = {"用户名","密码","手机号","创建时间"};
+        String[] columnNames = {"用户名","密码","手机号","注册邮箱","创建时间","更新时间","会员来源","昵称","真实姓名","使用状态"};
         String[] columns = {"username","password","phone","created"};
         ExcelUtils.exportExcel(response,userList,columnNames,columns,"用户表","E:\\test.html");
     }
