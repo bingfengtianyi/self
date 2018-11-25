@@ -39,7 +39,7 @@ public class CreateXSL {
     }
 
     @RequestMapping("importexcel")
-    public Map<String, Object> importexcel(MultipartFile file){
+    public Map<String, Object> importexcel(MultipartFile filePath){
         Map<String,Object> map = new HashMap<>();
         try {
             //用工具类
@@ -47,7 +47,7 @@ public class CreateXSL {
             SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
             for(int i=0;i<data.length;i++){
                 User user = new User();
-                user.setUsername(data[i][0]+"02");
+                user.setUsername(data[i][0]);
                 user.setPassword(data[i][1]);
                 user.setPhone(data[i][2]);
                 user.setEmail(data[i][3]);
