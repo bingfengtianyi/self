@@ -123,7 +123,7 @@ public class BrandServiceImpl   implements BrandService {
     @Transactional
     public void deleteBrandsByIds(long[] ids) {
         if (ids!=null&&ids.length>0){
-            brandDao.deleteBrandsByIds(ids);
+            //brandDao.deleteBrandsByIds(ids);
         }
     }
 
@@ -133,6 +133,7 @@ public class BrandServiceImpl   implements BrandService {
      */
     @Override
     public List<Map<String, String>> selectOptionList() {
-        return brandDao.selectOptionList();
+        //return brandDao.selectOptionList();
+        return null;
     }
 }

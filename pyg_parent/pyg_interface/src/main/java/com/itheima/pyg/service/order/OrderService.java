@@ -15,4 +15,7 @@ public interface OrderService {
 
     void updateOrderStatus(String out_trade_no,String transaction_id);
 
+    //查出未付款订单
+    List<Order> findOrderListByUserIdUnPay(String userId);
+
 }

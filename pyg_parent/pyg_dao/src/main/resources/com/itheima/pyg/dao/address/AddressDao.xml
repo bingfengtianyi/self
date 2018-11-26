@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.itheima.pyg.dao.address.AddressDao" >
-  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.address.Address" >
+<mapper namespace="com.dao.address.AddressDao" >
+  <resultMap id="BaseResultMap" type="com.pojo.address.Address" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
@@ -82,7 +82,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.address.AddressQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.address.AddressQuery" >
     select
     <if test="distinct" >
       distinct
@@ -106,13 +106,13 @@
     delete from tb_address
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.address.AddressQuery" >
+  <delete id="deleteByExample" parameterType="com.pojo.address.AddressQuery" >
     delete from tb_address
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.itheima.pyg.pojo.address.Address" >
+  <insert id="insert" parameterType="com.pojo.address.Address" >
     insert into tb_address (id, user_id, province_id, 
       city_id, town_id, mobile, 
       address, contact, is_default, 
@@ -124,7 +124,7 @@
       #{notes,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{alias,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.address.Address" >
+  <insert id="insertSelective" parameterType="com.pojo.address.Address" >
     insert into tb_address
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -203,7 +203,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.itheima.pyg.pojo.address.AddressQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.pojo.address.AddressQuery" resultType="java.lang.Integer" >
     select count(*) from tb_address
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -271,7 +271,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.address.Address" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.address.Address" >
     update tb_address
     <set >
       <if test="userId != null" >
@@ -310,7 +310,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.address.Address" >
+  <update id="updateByPrimaryKey" parameterType="com.pojo.address.Address" >
     update tb_address
     set user_id = #{userId,jdbcType=VARCHAR},
       province_id = #{provinceId,jdbcType=VARCHAR},

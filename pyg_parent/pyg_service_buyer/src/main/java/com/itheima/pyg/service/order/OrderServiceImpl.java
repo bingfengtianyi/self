@@ -166,4 +166,14 @@ public class OrderServiceImpl implements OrderService {
         //3.清除redis中支付日志
         redisTemplate.boundHashOps("payLog").delete(payLog.getUserId());
     }
+
+    /**
+     * //查出未付款订单
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Order> findOrderListByUserIdUnPay(String userId) {
+        return null;
+    }
 }

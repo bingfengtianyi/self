@@ -17,7 +17,6 @@ import com.itheima.pyg.pojo.good.GoodsDesc;
 import com.itheima.pyg.pojo.good.GoodsQuery;
 import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.item.ItemQuery;
-import com.itheima.pyg.service.goods.GoodsService;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.transaction.annotation.Transactional;
 

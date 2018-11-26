@@ -3,7 +3,6 @@ package com.itheima.pyg.service.search;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.itheima.pyg.pojo.item.Item;
-import com.itheima.pyg.service.search.ItemSearchService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;

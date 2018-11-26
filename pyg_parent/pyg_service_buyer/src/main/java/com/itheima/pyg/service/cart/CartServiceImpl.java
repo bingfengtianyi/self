@@ -5,7 +5,6 @@ import com.itheima.pyg.dao.item.ItemDao;
 import com.itheima.pyg.entity.vo.Cart;
 import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.order.OrderItem;
-import com.itheima.pyg.service.cart.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;

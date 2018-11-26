@@ -47,8 +47,8 @@
         </dependency>
         <!-- 文件上传组件 -->
         <dependency>
-            <groupId>org.csource</groupId>
-            <artifactId>fastdfs-fastdfs</artifactId>
+            <groupId>org.csource.fastdfs</groupId>
+            <artifactId>fastdfs</artifactId>
         </dependency>
 
         <dependency>
