@@ -5,6 +5,7 @@ import com.itheima.pyg.pojo.specification.SpecificationQuery;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SpecificationDao {
     int countByExample(SpecificationQuery example);
@@ -28,4 +29,9 @@ public interface SpecificationDao {
     int updateByPrimaryKeySelective(Specification record);
 
     int updateByPrimaryKey(Specification record);
+
+    /**
+     * 新增模板品牌规格查询
+     */
+    List<Map<String,String>> selectOptionList();
 }

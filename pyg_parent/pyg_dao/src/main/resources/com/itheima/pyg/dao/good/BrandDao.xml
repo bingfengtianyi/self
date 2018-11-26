@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.itheima.pyg.dao.good.BrandDao" >
-  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.good.Brand" >
+<mapper namespace="com.dao.good.BrandDao" >
+  <resultMap id="BaseResultMap" type="com.pojo.good.Brand" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="first_char" property="firstChar" jdbcType="VARCHAR" />
@@ -72,7 +72,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.good.BrandQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.good.BrandQuery" >
     select
     <if test="distinct" >
       distinct
@@ -96,19 +96,19 @@
     delete from tb_brand
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.good.BrandQuery" >
+  <delete id="deleteByExample" parameterType="com.pojo.good.BrandQuery" >
     delete from tb_brand
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.itheima.pyg.pojo.good.Brand" >
+  <insert id="insert" parameterType="com.pojo.good.Brand" >
     insert into tb_brand (id, name, first_char
       )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{firstChar,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.good.Brand" >
+  <insert id="insertSelective" parameterType="com.pojo.good.Brand" >
     insert into tb_brand
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -133,7 +133,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.itheima.pyg.pojo.good.BrandQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.pojo.good.BrandQuery" resultType="java.lang.Integer" >
     select count(*) from tb_brand
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -165,7 +165,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.good.Brand" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.good.Brand" >
     update tb_brand
     <set >
       <if test="name != null" >
@@ -177,10 +177,23 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.good.Brand" >
+  <update id="updateByPrimaryKey" parameterType="com.pojo.good.Brand" >
     update tb_brand
     set name = #{name,jdbcType=VARCHAR},
       first_char = #{firstChar,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <delete id="deleteByPrimaryKeys" parameterType="Long[]">
+    delete from tb_brand
+    <where>
+      <foreach collection="array" item="id" open="id in (" separator="," close=")">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+
+  <select id="selectOptionList" resultType="map">
+    select id ,name text from  tb_brand
+  </select>
 </mapper>

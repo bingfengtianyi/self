@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.itheima.pyg.dao.good.GoodsDescDao" >
-  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.good.GoodsDesc" >
+<mapper namespace="com.dao.good.GoodsDescDao" >
+  <resultMap id="BaseResultMap" type="com.pojo.good.GoodsDesc" >
     <id column="goods_id" property="goodsId" jdbcType="BIGINT" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="specification_items" property="specificationItems" jdbcType="VARCHAR" />
@@ -77,7 +77,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.good.GoodsDescQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.good.GoodsDescQuery" >
     select
     <if test="distinct" >
       distinct
@@ -101,13 +101,13 @@
     delete from tb_goods_desc
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.good.GoodsDescQuery" >
+  <delete id="deleteByExample" parameterType="com.pojo.good.GoodsDescQuery" >
     delete from tb_goods_desc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.itheima.pyg.pojo.good.GoodsDesc" >
+  <insert id="insert" parameterType="com.pojo.good.GoodsDesc" >
     insert into tb_goods_desc (goods_id, introduction, specification_items, 
       custom_attribute_items, item_images, package_list, 
       sale_service)
@@ -115,7 +115,7 @@
       #{customAttributeItems,jdbcType=VARCHAR}, #{itemImages,jdbcType=VARCHAR}, #{packageList,jdbcType=VARCHAR}, 
       #{saleService,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.good.GoodsDesc" >
+  <insert id="insertSelective" parameterType="com.pojo.good.GoodsDesc" >
     insert into tb_goods_desc
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="goodsId != null" >
@@ -164,7 +164,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.itheima.pyg.pojo.good.GoodsDescQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.pojo.good.GoodsDescQuery" resultType="java.lang.Integer" >
     select count(*) from tb_goods_desc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -212,7 +212,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.good.GoodsDesc" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.good.GoodsDesc" >
     update tb_goods_desc
     <set >
       <if test="introduction != null" >
@@ -236,7 +236,7 @@
     </set>
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.good.GoodsDesc" >
+  <update id="updateByPrimaryKey" parameterType="com.pojo.good.GoodsDesc" >
     update tb_goods_desc
     set introduction = #{introduction,jdbcType=VARCHAR},
       specification_items = #{specificationItems,jdbcType=VARCHAR},

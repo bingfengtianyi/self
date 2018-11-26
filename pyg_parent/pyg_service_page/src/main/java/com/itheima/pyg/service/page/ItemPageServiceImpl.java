@@ -9,7 +9,6 @@ import com.itheima.pyg.pojo.good.Goods;
 import com.itheima.pyg.pojo.good.GoodsDesc;
 import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.item.ItemQuery;
-import com.itheima.pyg.service.page.ItemPageService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.itheima.pyg.dao.specification.SpecificationOptionDao" >
-  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.specification.SpecificationOption" >
+<mapper namespace="com.dao.specification.SpecificationOptionDao" >
+  <resultMap id="BaseResultMap" type="com.pojo.specification.SpecificationOption" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="option_name" property="optionName" jdbcType="VARCHAR" />
     <result column="spec_id" property="specId" jdbcType="BIGINT" />
@@ -73,7 +73,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.specification.SpecificationOptionQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.specification.SpecificationOptionQuery" >
     select
     <if test="distinct" >
       distinct
@@ -97,19 +97,19 @@
     delete from tb_specification_option
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.specification.SpecificationOptionQuery" >
+  <delete id="deleteByExample" parameterType="com.pojo.specification.SpecificationOptionQuery" >
     delete from tb_specification_option
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.itheima.pyg.pojo.specification.SpecificationOption" >
+  <insert id="insert" parameterType="com.pojo.specification.SpecificationOption" >
     insert into tb_specification_option (id, option_name, spec_id, 
       orders)
     values (#{id,jdbcType=BIGINT}, #{optionName,jdbcType=VARCHAR}, #{specId,jdbcType=BIGINT}, 
       #{orders,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.specification.SpecificationOption" >
+  <insert id="insertSelective" parameterType="com.pojo.specification.SpecificationOption" >
     insert into tb_specification_option
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -140,7 +140,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.itheima.pyg.pojo.specification.SpecificationOptionQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.pojo.specification.SpecificationOptionQuery" resultType="java.lang.Integer" >
     select count(*) from tb_specification_option
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -176,7 +176,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.specification.SpecificationOption" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.specification.SpecificationOption" >
     update tb_specification_option
     <set >
       <if test="optionName != null" >
@@ -191,11 +191,26 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.specification.SpecificationOption" >
+  <update id="updateByPrimaryKey" parameterType="com.pojo.specification.SpecificationOption" >
     update tb_specification_option
     set option_name = #{optionName,jdbcType=VARCHAR},
       spec_id = #{specId,jdbcType=BIGINT},
       orders = #{orders,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <insert id="insertSelectives" parameterType="list">
+    insert into tb_specification_option(option_name,spec_id,orders)
+    values
+    <foreach collection="list" item="entity" separator="," index="index">
+      (
+        #{entity.optionName},
+        #{entity.specId},
+        #{entity.orders}
+      )
+    </foreach>
+  </insert>
+
+
 </mapper>
