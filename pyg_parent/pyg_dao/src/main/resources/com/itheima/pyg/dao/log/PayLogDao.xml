@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.log.PayLogDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.log.PayLog" >
+<mapper namespace="com.itheima.pyg.dao.log.PayLogDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.log.PayLog" >
     <id column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
@@ -79,7 +79,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.log.PayLogQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.log.PayLogQuery" >
     select
     <if test="distinct" >
       distinct
@@ -103,13 +103,13 @@
     delete from tb_pay_log
     where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.log.PayLogQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.log.PayLogQuery" >
     delete from tb_pay_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.log.PayLog" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.log.PayLog" >
     insert into tb_pay_log (out_trade_no, create_time, pay_time, 
       total_fee, user_id, transaction_id, 
       trade_state, order_list, pay_type
@@ -119,7 +119,7 @@
       #{tradeState,jdbcType=VARCHAR}, #{orderList,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.log.PayLog" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.log.PayLog" >
     insert into tb_pay_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="outTradeNo != null" >
@@ -180,7 +180,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.log.PayLogQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.log.PayLogQuery" resultType="java.lang.Integer" >
     select count(*) from tb_pay_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -236,7 +236,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.log.PayLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.log.PayLog" >
     update tb_pay_log
     <set >
       <if test="createTime != null" >
@@ -266,7 +266,7 @@
     </set>
     where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.log.PayLog" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.log.PayLog" >
     update tb_pay_log
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       pay_time = #{payTime,jdbcType=TIMESTAMP},

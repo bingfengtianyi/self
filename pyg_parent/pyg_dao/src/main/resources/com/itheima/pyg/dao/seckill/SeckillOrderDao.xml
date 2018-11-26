@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.seckill.SeckillOrderDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.seckill.SeckillOrder" >
+<mapper namespace="com.itheima.pyg.dao.seckill.SeckillOrderDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.seckill.SeckillOrder" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="seckill_id" property="seckillId" jdbcType="BIGINT" />
     <result column="money" property="money" jdbcType="DECIMAL" />
@@ -82,7 +82,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.seckill.SeckillOrderQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrderQuery" >
     select
     <if test="distinct" >
       distinct
@@ -106,13 +106,13 @@
     delete from tb_seckill_order
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.seckill.SeckillOrderQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrderQuery" >
     delete from tb_seckill_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.seckill.SeckillOrder" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrder" >
     insert into tb_seckill_order (id, seckill_id, money, 
       user_id, seller_id, create_time, 
       pay_time, status, receiver_address, 
@@ -124,7 +124,7 @@
       #{receiverMobile,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, #{transactionId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.seckill.SeckillOrder" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrder" >
     insert into tb_seckill_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -203,7 +203,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.seckill.SeckillOrderQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrderQuery" resultType="java.lang.Integer" >
     select count(*) from tb_seckill_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -271,7 +271,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.seckill.SeckillOrder" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrder" >
     update tb_seckill_order
     <set >
       <if test="seckillId != null" >
@@ -310,7 +310,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.seckill.SeckillOrder" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.seckill.SeckillOrder" >
     update tb_seckill_order
     set seckill_id = #{seckillId,jdbcType=BIGINT},
       money = #{money,jdbcType=DECIMAL},

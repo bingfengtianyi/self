@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.order.OrderDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.order.Order" >
+<mapper namespace="com.itheima.pyg.dao.order.OrderDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.order.Order" >
     <id column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="payment" property="payment" jdbcType="DECIMAL" />
     <result column="payment_type" property="paymentType" jdbcType="VARCHAR" />
@@ -98,7 +98,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.order.OrderQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.order.OrderQuery" >
     select
     <if test="distinct" >
       distinct
@@ -122,13 +122,13 @@
     delete from tb_order
     where order_id = #{orderId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.order.OrderQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.order.OrderQuery" >
     delete from tb_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.order.Order" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.order.Order" >
     insert into tb_order (order_id, payment, payment_type, 
       post_fee, status, create_time, 
       update_time, payment_time, consign_time, 
@@ -148,7 +148,7 @@
       #{expire,jdbcType=TIMESTAMP}, #{invoiceType,jdbcType=VARCHAR}, #{sourceType,jdbcType=VARCHAR}, 
       #{sellerId,jdbcType=VARCHAR},#{outTradeNo,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.order.Order" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.order.Order" >
     insert into tb_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -305,7 +305,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.order.OrderQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.order.OrderQuery" resultType="java.lang.Integer" >
     select count(*) from tb_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -425,7 +425,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.order.Order" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.order.Order" >
     update tb_order
     <set >
       <if test="payment != null" >
@@ -503,7 +503,7 @@
     </set>
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.order.Order" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.order.Order" >
     update tb_order
     set payment = #{payment,jdbcType=DECIMAL},
       payment_type = #{paymentType,jdbcType=VARCHAR},

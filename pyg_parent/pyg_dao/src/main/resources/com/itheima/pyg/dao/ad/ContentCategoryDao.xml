@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.ad.ContentCategoryDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.ad.ContentCategory" >
+<mapper namespace="com.itheima.pyg.dao.ad.ContentCategoryDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.ad.ContentCategory" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
@@ -71,7 +71,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.ad.ContentCategoryQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.ad.ContentCategoryQuery" >
     select
     <if test="distinct" >
       distinct
@@ -95,17 +95,17 @@
     delete from tb_content_category
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.ad.ContentCategoryQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.ad.ContentCategoryQuery" >
     delete from tb_content_category
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.ad.ContentCategory" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.ad.ContentCategory" >
     insert into tb_content_category (id, name)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.ad.ContentCategory" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.ad.ContentCategory" >
     insert into tb_content_category
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -124,7 +124,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.ad.ContentCategoryQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.ad.ContentCategoryQuery" resultType="java.lang.Integer" >
     select count(*) from tb_content_category
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -152,7 +152,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.ad.ContentCategory" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.ad.ContentCategory" >
     update tb_content_category
     <set >
       <if test="name != null" >
@@ -161,7 +161,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.ad.ContentCategory" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.ad.ContentCategory" >
     update tb_content_category
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}

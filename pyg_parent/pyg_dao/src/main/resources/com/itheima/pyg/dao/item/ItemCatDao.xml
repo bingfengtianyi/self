@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.item.ItemCatDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.item.ItemCat" >
+<mapper namespace="com.itheima.pyg.dao.item.ItemCatDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.item.ItemCat" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="parent_id" property="parentId" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -73,7 +73,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.item.ItemCatQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.item.ItemCatQuery" >
     select
     <if test="distinct" >
       distinct
@@ -97,19 +97,19 @@
     delete from tb_item_cat
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.item.ItemCatQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.item.ItemCatQuery" >
     delete from tb_item_cat
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.item.ItemCat" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.item.ItemCat" >
     insert into tb_item_cat (id, parent_id, name, 
       type_id)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{typeId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.item.ItemCat" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.item.ItemCat" >
     insert into tb_item_cat
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -140,7 +140,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.item.ItemCatQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.item.ItemCatQuery" resultType="java.lang.Integer" >
     select count(*) from tb_item_cat
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -176,7 +176,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.item.ItemCat" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.item.ItemCat" >
     update tb_item_cat
     <set >
       <if test="parentId != null" >
@@ -191,7 +191,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.item.ItemCat" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.item.ItemCat" >
     update tb_item_cat
     set parent_id = #{parentId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

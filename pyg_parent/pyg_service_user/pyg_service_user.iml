@@ -11,6 +11,14 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="ApplicationContext Service" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-jms-producer.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -37,7 +45,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
-          <root url="jar://D:/develop/java/lib/jconsole.jar!/" />
+          <root url="jar://D:/develop/jdk-8U172/lib/jconsole.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,7 +54,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
-          <root url="jar://D:/develop/java/lib/tools.jar!/" />
+          <root url="jar://D:/develop/jdk-8U172/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
