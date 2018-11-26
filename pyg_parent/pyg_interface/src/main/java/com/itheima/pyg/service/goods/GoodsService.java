@@ -5,7 +5,15 @@ import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.entity.vo.GoodsVo;
 import com.itheima.pyg.pojo.good.Goods;
 
+import java.util.List;
+
 public interface GoodsService {
+    /**
+     * 运营商后台 查询全部商品,用于导出excel
+     * @return
+     */
+    List<Goods> getGoodList();
+
     /**
      * 商品录入
      * @param goodsVo

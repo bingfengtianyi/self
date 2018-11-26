@@ -18,4 +18,10 @@ public interface OrderService {
     //查出未付款订单
     List<Order> findOrderListByUserIdUnPay(String userId);
 
+    /**
+     * 运营商后台 查询全部订单数据用于导出excel
+     * @return
+     */
+    List<Order> getOrderList();
+
 }
