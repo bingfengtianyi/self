@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.ad.ContentDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.ad.Content" >
+<mapper namespace="com.itheima.pyg.dao.ad.ContentDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.ad.Content" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="category_id" property="categoryId" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
@@ -76,7 +76,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.ad.ContentQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.ad.ContentQuery" >
     select
     <if test="distinct" >
       distinct
@@ -100,13 +100,13 @@
     delete from tb_content
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.ad.ContentQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.ad.ContentQuery" >
     delete from tb_content
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.ad.Content" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.ad.Content" >
     insert into tb_content (id, category_id, title, 
       url, pic, status, sort_order
       )
@@ -114,7 +114,7 @@
       #{url,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.ad.Content" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.ad.Content" >
     insert into tb_content
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -163,7 +163,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.ad.ContentQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.ad.ContentQuery" resultType="java.lang.Integer" >
     select count(*) from tb_content
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -211,7 +211,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.ad.Content" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.ad.Content" >
     update tb_content
     <set >
       <if test="categoryId != null" >
@@ -235,7 +235,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.ad.Content" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.ad.Content" >
     update tb_content
     set category_id = #{categoryId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},

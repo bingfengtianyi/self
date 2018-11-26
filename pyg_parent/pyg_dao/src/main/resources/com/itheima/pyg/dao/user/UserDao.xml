@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.user.UserDao" >
-  <resultMap id="BaseResultMap" type="com.pojo.user.User" >
+<mapper namespace="com.itheima.pyg.dao.user.UserDao" >
+  <resultMap id="BaseResultMap" type="com.itheima.pyg.pojo.user.User" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -93,7 +93,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.user.UserQuery" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itheima.pyg.pojo.user.UserQuery" >
     select
     <if test="distinct" >
       distinct
@@ -117,13 +117,13 @@
     delete from tb_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pojo.user.UserQuery" >
+  <delete id="deleteByExample" parameterType="com.itheima.pyg.pojo.user.UserQuery" >
     delete from tb_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pojo.user.User" >
+  <insert id="insert" parameterType="com.itheima.pyg.pojo.user.User" >
     insert into tb_user (id, username, password, 
       phone, email, created, 
       updated, source_type, nick_name, 
@@ -141,7 +141,7 @@
       #{points,jdbcType=INTEGER}, #{experienceValue,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
       #{lastLoginTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.pojo.user.User" >
+  <insert id="insertSelective" parameterType="com.itheima.pyg.pojo.user.User" >
     insert into tb_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -280,7 +280,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pojo.user.UserQuery" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.itheima.pyg.pojo.user.UserQuery" resultType="java.lang.Integer" >
     select count(*) from tb_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -388,7 +388,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.user.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itheima.pyg.pojo.user.User" >
     update tb_user
     <set >
       <if test="username != null" >
@@ -457,7 +457,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pojo.user.User" >
+  <update id="updateByPrimaryKey" parameterType="com.itheima.pyg.pojo.user.User" >
     update tb_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
