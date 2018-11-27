@@ -22,6 +22,10 @@
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/orderController.js"></script>
     <script type="text/javascript" src="../js/service/orderService.js"></script>
+    <!--引入图表相关js和css-->
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-login-manage.css" />
+    <script src="../plugins/echarts.js"></script>
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="orderController">
 <!-- .box-body -->
@@ -39,6 +43,7 @@
             <div class="form-group form-inline">
                 <div class="btn-group">
                     <a title="导出订单数据" class="btn btn-default" href="/createXSL/exportexcelForOrders.action">导出订单数据</a>
+                    <button type="button" class="btn btn-default" title="查看销售折线图" data-toggle="modal" data-target="#editModal" ><i class="fa fa-file-o"></i> 新建</button>
                 </div>
             </div>
         </div>
@@ -82,5 +87,64 @@
 
 </div>
 <!-- /.box-body -->
+
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">销售折线图</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped"  width="800px">
+                    <tr>
+                        <td>开始时间</td>
+                        <td><input type="date" ng-model="entity.name" class="form-control">  </td>
+                    </tr>
+                    <tr>
+                        <td>结束时间</td>
+                        <td><input type="date" ng-model="entity.firstChar" class="form-control">  </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">查询</button>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="main" style="width: 600px;height:400px;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main'));
+
+                    // 指定图表的配置项和数据
+                    var option = {
+                        title:{
+                            text:'订单统计折线图',
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: [820, 932, 901, 934, 1290, 1330, 1320],
+                            type: 'line'
+                        }]
+                    };
+
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                </script>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
