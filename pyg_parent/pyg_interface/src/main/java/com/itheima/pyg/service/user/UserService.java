@@ -1,5 +1,6 @@
 package com.itheima.pyg.service.user;
 
+import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.pojo.user.User;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +14,9 @@ public interface UserService {
 
     boolean checkSmsCode(String phone,String smscode);
 
-    List<User> getUserList();
+    List<User>  getUserList();
+
+    PageResult<User> getUserListByPage(Integer pageNum, Integer pageSize);
 
     void save(User user);
 

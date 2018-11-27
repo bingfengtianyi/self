@@ -88,7 +88,7 @@ public class CreateXSL {
     }
 
     @RequestMapping("importexcel")
-    public Map<String, Object> importexcel(MultipartFile filePath) {
+    public Map<String, Object> importexcel(MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
         try {
             //用工具类

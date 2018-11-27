@@ -18,7 +18,7 @@ app.controller("brandController",function($scope,$controller,$http,brandService)
 			$scope.paginationConf.totalItems = response.total;
 			$scope.list = response.rows;
 		});
-	}
+	};
 	
 	// 保存品牌的方法:
 	$scope.save = function(){
