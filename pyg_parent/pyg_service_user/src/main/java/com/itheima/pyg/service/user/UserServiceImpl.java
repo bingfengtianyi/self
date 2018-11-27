@@ -1,9 +1,11 @@
 package com.itheima.pyg.service.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.itheima.pyg.dao.user.UserDao;
+import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.pojo.user.User;
-import com.itheima.pyg.util.ExcelUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -83,12 +85,27 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 获得用户列表
+     * 查询全部用户列表
      * @return
      */
     @Override
     public List<User> getUserList() {
         return userDao.selectByExample(null);
+    }
+
+    /**
+     * 分页获得用户列表
+     * @return
+     */
+    @Override
+    public PageResult<User> getUserListByPage(Integer pageNum, Integer pageSize) {
+        //设置分页查询条件
+        PageHelper.startPage(pageNum,pageSize);
+        //进行查询
+        Page<User> page = (Page<User>) userDao.selectByExample(null);
+        //封装PageResult对象
+        PageResult<User>   pageResult = new PageResult<>(page.getTotal(),page.getResult());
+        return pageResult;
     }
 
     /**

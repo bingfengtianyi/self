@@ -17,6 +17,7 @@ import com.itheima.pyg.pojo.good.GoodsDesc;
 import com.itheima.pyg.pojo.good.GoodsQuery;
 import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.item.ItemQuery;
+import com.itheima.pyg.pojo.order.Order;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +50,11 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Resource
     private SolrTemplate solrTemplate;
+
+    @Override
+    public List<Goods> getGoodList() {
+        return goodsDao.selectByExample(null);
+    }
 
     /**
      * 商品录入
@@ -280,5 +286,16 @@ public class GoodsServiceImpl implements GoodsService {
                 //TODO 删除商品静态页面(可选)
             }
         }
+    }
+
+    @Override
+    public PageResult<Goods> getGoodsListByPage(Integer pageNum, Integer pageSize) {
+        //设置分页查询条件
+        PageHelper.startPage(pageNum,pageSize);
+        //进行查询
+        Page<Goods> page = (Page<Goods>) goodsDao.selectByExample(null);
+        //封装PageResult对象
+        PageResult<Goods>   pageResult = new PageResult<>(page.getTotal(),page.getResult());
+        return pageResult;
     }
 }

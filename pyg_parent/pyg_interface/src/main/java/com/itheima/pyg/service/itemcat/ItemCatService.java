@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface ItemCatService {
     /**
+     * 向数据库添加分类,用于excel数据导入数据库
+     * @param itemCat
+     */
+    void save(ItemCat itemCat);
+    /**
      * 根据父ID查询分类列表
      * @param parentId
      * @return

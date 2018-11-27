@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller,itemCatService   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller,itemCatService,goodsService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -102,4 +102,16 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService   ,
 			}
 		});
 	}
+    $scope.reloadList = function(){
+        // $scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+        $scope.findPageAll($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+    }
+    // 分页查询
+    $scope.findPageAll = function(page,rows){
+        // 向后台发送请求获取数据:
+        goodsService.findPageAll(page,rows).success(function(response){
+            $scope.paginationConf.totalItems = response.total;
+            $scope.list = response.rows;
+        });
+    };
 });	
