@@ -19,7 +19,7 @@
         <!--配置应用名称-->
         <dubbo:application name="pyg_service_sellergoods"/>
         <!--配置注册中心-->
-        <dubbo:registry address="zookeeper://192.168.174.128:2181"  timeout="100000"/>
+        <dubbo:registry address="zookeeper://192.168.23.130:2181"  timeout="100000"/>
         <!--暴露接口到注册中心-->
         <dubbo:annotation   package="com.itheima.pyg.service"/>
         <dubbo:protocol name="dubbo"    port="20880"/>

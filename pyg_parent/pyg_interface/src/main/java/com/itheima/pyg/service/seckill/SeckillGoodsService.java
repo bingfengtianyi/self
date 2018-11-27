@@ -15,6 +15,8 @@ public interface SeckillGoodsService {
      */
     List<SeckillGoods>  findSeckillGoodList();
 
+    List<SeckillGoods>  findSeckillGoodListFromDB();
+
     /**
      * 根据id查询秒杀商品实体对象
      * @param id

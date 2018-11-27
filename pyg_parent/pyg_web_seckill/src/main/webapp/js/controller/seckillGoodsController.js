@@ -54,3 +54,5 @@ app.controller('seckillGoodsController',function ($scope,$location,$interval,sec
     }
 
 });
+
+app.controller()
