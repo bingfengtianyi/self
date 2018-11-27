@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -290,6 +291,9 @@ public class ExcelUtils {
 					}else if (m.invoke(o) instanceof Integer){
  						Integer integer = (Integer)m.invoke(o);
 						value = integer.toString();
+					}else if (m.invoke(o) instanceof BigDecimal){
+						BigDecimal bd = (BigDecimal)m.invoke(o);
+						value = bd.toString();
 					}else {
 						value = (String) m.invoke(o);
 					}

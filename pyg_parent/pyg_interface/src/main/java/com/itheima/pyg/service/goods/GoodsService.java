@@ -4,6 +4,7 @@ import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.entity.vo.GoodsVo;
 import com.itheima.pyg.pojo.good.Goods;
+import com.itheima.pyg.pojo.order.Order;
 
 import java.util.List;
 
@@ -64,4 +65,12 @@ public interface GoodsService {
      * @param ids
      */
     void delete(long[] ids);
+
+    /**
+     * 分页获取商品列表
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageResult<Goods> getGoodsListByPage(Integer pageNum, Integer pageSize);
 }

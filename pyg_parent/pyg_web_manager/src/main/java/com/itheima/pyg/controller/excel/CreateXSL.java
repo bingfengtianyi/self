@@ -2,6 +2,7 @@ package com.itheima.pyg.controller.excel;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.pyg.pojo.good.Goods;
+import com.itheima.pyg.pojo.order.Order;
 import com.itheima.pyg.pojo.user.User;
 import com.itheima.pyg.service.goods.GoodsService;
 import com.itheima.pyg.service.order.OrderService;
@@ -55,7 +56,7 @@ public class CreateXSL {
      */
     @RequestMapping("exportexcelForOrders")
     public void exportexcelForOrders(HttpServletResponse response) {
-        List<Goods> userList = goodsService.getGoodList();
+        List<Order> userList = orderService.getOrderList();
         String[] columnNames = {
                 "订单id","实付金额","支付类型","邮费","状态","订单创建时间","订单更新时间","付款时间",
                 "发货时间","交易完成时间","交易关闭时间","物流名称","物流单号","用户id","买家留言",
