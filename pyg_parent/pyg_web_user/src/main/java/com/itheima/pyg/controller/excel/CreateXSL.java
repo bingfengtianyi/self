@@ -31,9 +31,9 @@ public class CreateXSL {
                 "生日","最后登录时间"
         };
         String[] columns = {
-                "username","password","phone","email","created","updated","sourceType","nickName","status",
-                "headPic","qq","accountBalance","isMobileCheck","isEmailCheck","sex","userLevel","points",
-                "experienceValue","birthday","lastLoginTime"
+                "username","password","phone","email","created","updated","sourceType","nickName","name",
+                "status","headPic","qq","accountBalance","isMobileCheck","isEmailCheck","sex","userLevel",
+                "points","experienceValue","birthday","lastLoginTime"
         };
         ExcelUtils.exportExcel(response,userList,columnNames,columns,"用户表","E:\\test.html");
     }
