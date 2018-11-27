@@ -54,10 +54,20 @@
         </authentication-provider>
     </authentication-manager>
 
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="123456" authorities="ROLE_SELLER"/>
+                <user name="sunwukong" password="dasheng" authorities="ROLE_ADMIN"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
 
     <!-- 引用dubbo 服务 -->
     <dubbo:application name="pinyougou-web-shop" />
-    <dubbo:registry address="zookeeper://192.168.174.128:2181"/>
+    <dubbo:registry address="zookeeper://192.168.23.130:2181"/>
     <dubbo:reference id="sellerService"  interface="com.itheima.pyg.service.seller.SellerService" >
     </dubbo:reference>
 
