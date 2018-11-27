@@ -40,9 +40,14 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <!--加载springSecurity框架-->
-  <context-param>
+  <!--<context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:spring/spring-security.xml</param-value>
+  </context-param>-->
+  <!--加载springSecurity框架,activemq,-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:spring/*.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -90,5 +91,20 @@ public class ItemPageServiceImpl implements ItemPageService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean deleteItemPage(Long[] goodsIds) {
+        try {
+            for (Long goodsId : goodsIds) {
+                // 删除文件夹中的文件
+                new File(pageDir + goodsId + ".html").delete();
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }

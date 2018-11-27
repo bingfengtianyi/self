@@ -6,9 +6,16 @@ import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.pojo.good.Goods;
 import com.itheima.pyg.service.goods.GoodsService;
 import com.itheima.pyg.service.page.ItemPageService;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 
 @RestController
 @RequestMapping("goods")
@@ -19,6 +26,15 @@ public class GoodsController {
 
     @Reference
     private ItemPageService itemPageService;
+
+    @Reference
+    private JmsTemplate jmsTemplate;
+
+    @Reference
+    private Destination topicPageDestination;
+
+    @Reference
+    private Destination topicPageDeleteDestination;
 
     @RequestMapping("genHtml")
     public void genHtml(long goodsId){
@@ -48,6 +64,18 @@ public class GoodsController {
     public Result   updateStatus(long[] ids,String status){
         try {
             goodsService.updateStatus(ids,status);
+
+            /*审核成功,生成静态详情页*/
+            for (final Long goodsId : ids) {
+
+                /*审核成功发送消息队列*/
+                jmsTemplate.send(topicPageDestination, new MessageCreator() {
+                    @Override
+                    public Message createMessage(Session session) throws JMSException {
+                        return session.createObjectMessage(goodsId);
+                    }
+                });
+            }
             return new Result(true,"操作成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,9 +89,18 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("delete")
-    public Result   delete(long[] ids){
+    public Result delete(final long[] ids){
         try {
             goodsService.delete(ids);
+            /*删除商品,删除索引库*/
+                /*审核成功发送消息队列*/
+                jmsTemplate.send(topicPageDeleteDestination, new MessageCreator() {
+                    @Override
+                    public Message createMessage(Session session) throws JMSException {
+                        return session.createObjectMessage(ids);
+                    }
+                });
+
             return new Result(true,"删除成功");
         } catch (Exception e) {
             e.printStackTrace();

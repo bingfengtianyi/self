@@ -238,10 +238,10 @@ public class GoodsServiceImpl implements GoodsService {
             for (long id : ids) {
                 goods.setId(id);
                 goodsDao.updateByPrimaryKeySelective(goods);
-                if ("1".equals(status)){//审核成功
-                    dataImportItemToSolr();
+              /*  if ("1".equals(status)){//审核成功
+                    //dataImportItemToSolr();
                     //TODO  生成静态页面
-                }
+                }*/
             }
         }
     }
@@ -249,7 +249,7 @@ public class GoodsServiceImpl implements GoodsService {
     /**
      * 将数据库中的数据保存到索引库
      */
-    private void dataImportItemToSolr(){
+   /* private void dataImportItemToSolr(){
         List<Item> itemList = itemDao.selectByExample(null);
         if (itemList!=null&&itemList.size()>0){
             for (Item item : itemList) {
@@ -261,7 +261,7 @@ public class GoodsServiceImpl implements GoodsService {
             solrTemplate.commit();
         }
 
-    }
+    }*/
 
     /**
      * 逻辑删除待审核商品

@@ -8,4 +8,11 @@ public interface ItemPageService {
      * @throws Exception
      */
     boolean genHtml(long goodsId);
+
+    /**
+     * 删除静态页面的方法
+     * @param goodsId
+     * @throws Exception
+     */
+    boolean deleteItemPage(Long[] goodsIds);
 }
