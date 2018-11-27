@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.pojo.good.Goods;
+import com.itheima.pyg.pojo.order.Order;
 import com.itheima.pyg.service.goods.GoodsService;
 import com.itheima.pyg.service.page.ItemPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,5 +109,10 @@ public class GoodsController {
             e.printStackTrace();
             return new Result(false,"删除失败");
         }
+    }
+
+    @RequestMapping("findGoodsList")
+    public PageResult<Goods> findGoodsList(Integer pageNum, Integer pageSize){
+        return goodsService.getGoodsListByPage(pageNum,pageSize);
     }
 }

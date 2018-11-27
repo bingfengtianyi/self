@@ -1,16 +1,20 @@
 package com.itheima.pyg.service.order;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.itheima.pyg.dao.item.ItemDao;
 import com.itheima.pyg.dao.log.PayLogDao;
 import com.itheima.pyg.dao.order.OrderDao;
 import com.itheima.pyg.dao.order.OrderItemDao;
+import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.entity.vo.Cart;
 import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.log.PayLog;
 import com.itheima.pyg.pojo.order.Order;
 import com.itheima.pyg.pojo.order.OrderItem;
 import com.itheima.pyg.pojo.order.OrderQuery;
+import com.itheima.pyg.pojo.user.User;
 import com.itheima.pyg.util.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -41,6 +45,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ItemDao itemDao;
+
+    /**
+     * 分页获得订单列表
+     * @return
+     */
+    @Override
+    public PageResult<Order> getOrderListByPage(Integer pageNum, Integer pageSize) {
+        //设置分页查询条件
+        PageHelper.startPage(pageNum,pageSize);
+        //进行查询
+        Page<Order> page = (Page<Order>) orderDao.selectByExample(null);
+        //封装PageResult对象
+        PageResult<Order>   pageResult = new PageResult<>(page.getTotal(),page.getResult());
+        return pageResult;
+    }
+
+
+
+
 
     /**
      * 保存订单信息及订单明细到数据库
@@ -175,5 +198,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findOrderListByUserIdUnPay(String userId) {
         return null;
+    }
+
+    /**
+     * 运营商后台,查询订单数据,用于导出excel
+     * @return
+     */
+    @Override
+    public List<Order> getOrderList() {
+        return orderDao.selectByExample(null);
     }
 }

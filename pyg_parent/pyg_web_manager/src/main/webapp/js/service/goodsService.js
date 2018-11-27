@@ -9,6 +9,10 @@ app.service('goodsService',function($http){
 	this.findPage=function(page,rows){
 		return $http.get('../goods/findPage.action?pageNum='+page+'&pageSize='+rows);
 	}
+	//全部商品分页
+    this.findPageAll = function(page,rows){
+        return $http.get("../goods/findGoodsList.action?pageNum="+page+"&pageSize="+rows);
+    }
 	//查询实体
 	this.findOne=function(id){
 		return $http.get('../goods/findOne.action?id='+id);

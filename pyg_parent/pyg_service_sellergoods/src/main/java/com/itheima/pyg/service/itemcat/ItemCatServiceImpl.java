@@ -21,6 +21,11 @@ public class ItemCatServiceImpl implements ItemCatService {
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
 
+    @Override
+    public void save(ItemCat itemCat) {
+
+    }
+
     /**
      * 根据父ID查询分类列表
      * @param parentId
