@@ -50,6 +50,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Resource
     private SolrTemplate solrTemplate;
 
+    @Override
+    public List<Goods> getGoodList() {
+        return goodsDao.selectByExample(null);
+    }
+
     /**
      * 商品录入
      *

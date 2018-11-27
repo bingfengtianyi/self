@@ -284,6 +284,12 @@ public class ExcelUtils {
  						Date date = (Date) m.invoke(o);
  						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 						value = dateFormat.format(date);
+					}else if (m.invoke(o) instanceof Long){
+						Long l = (Long)m.invoke(o);
+						value = l.toString();
+					}else if (m.invoke(o) instanceof Integer){
+ 						Integer integer = (Integer)m.invoke(o);
+						value = integer.toString();
 					}else {
 						value = (String) m.invoke(o);
 					}

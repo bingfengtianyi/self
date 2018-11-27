@@ -176,4 +176,13 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findOrderListByUserIdUnPay(String userId) {
         return null;
     }
+
+    /**
+     * 运营商后台,查询订单数据,用于导出excel
+     * @return
+     */
+    @Override
+    public List<Order> getOrderList() {
+        return orderDao.selectByExample(null);
+    }
 }
