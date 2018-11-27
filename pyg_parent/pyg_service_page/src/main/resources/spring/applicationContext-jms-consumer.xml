@@ -8,7 +8,7 @@
 
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供-->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="tcp://192.168.25.170:61616"/>
+        <property name="brokerURL" value="tcp://192.168.174.129:61616"/>
     </bean>
 
     <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
@@ -23,6 +23,7 @@
     </bean>
 
     <!-- 消息监听容器 -->
+    <bean id="itemPageListener" class="com.itheima.pyg.service.page.ItemPageListener"/>
     <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory" />
         <property name="destination" ref="topicPageDestination" />
@@ -35,6 +36,7 @@
     </bean>
 
     <!-- 消息监听容器 -->
+   <bean id="itemPageDeleteListener" class="com.itheima.pyg.service.page.ItemPageDeleteListener"/>
     <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory" />
         <property name="destination" ref="topicPageDeleteDestination" />

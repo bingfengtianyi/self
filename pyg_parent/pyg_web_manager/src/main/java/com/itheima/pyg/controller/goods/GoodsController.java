@@ -6,6 +6,7 @@ import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.pojo.good.Goods;
 import com.itheima.pyg.service.goods.GoodsService;
 import com.itheima.pyg.service.page.ItemPageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,13 +28,13 @@ public class GoodsController {
     @Reference
     private ItemPageService itemPageService;
 
-    @Reference
+    @Autowired
     private JmsTemplate jmsTemplate;
 
-    @Reference
+    @Autowired
     private Destination topicPageDestination;
 
-    @Reference
+    @Autowired
     private Destination topicPageDeleteDestination;
 
     @RequestMapping("genHtml")
@@ -89,14 +90,15 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("delete")
-    public Result delete(final long[] ids){
+    public Result delete(final Long[] ids){
         try {
             goodsService.delete(ids);
-            /*删除商品,删除索引库*/
-                /*审核成功发送消息队列*/
+            /*删除商品,删除静态详情页*/
+                /*删除后发送消息队列*/
                 jmsTemplate.send(topicPageDeleteDestination, new MessageCreator() {
                     @Override
                     public Message createMessage(Session session) throws JMSException {
+                        System.out.println("发送消息队列");
                         return session.createObjectMessage(ids);
                     }
                 });

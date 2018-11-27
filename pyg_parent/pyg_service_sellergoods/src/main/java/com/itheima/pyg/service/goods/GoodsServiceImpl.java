@@ -269,7 +269,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @param ids
      */
     @Override
-    public void delete(long[] ids) {
+    public void delete(Long[] ids) {
         Goods goods = new Goods();
         goods.setIsDelete("1");
         if (ids!=null&&ids.length>0){

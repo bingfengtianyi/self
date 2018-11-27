@@ -18,10 +18,13 @@ public class ItemPageDeleteListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
 
+        System.out.println("监听");
+
             // 接收消息
             ObjectMessage objectMessage = (ObjectMessage) message;
             try {
                 Long[] ids = (Long[]) objectMessage.getObject();
+                System.out.println("监听"+ids);
                 // 执行删除商品详细页
                 itemPageService.deleteItemPage(ids);
             } catch (JMSException e) {

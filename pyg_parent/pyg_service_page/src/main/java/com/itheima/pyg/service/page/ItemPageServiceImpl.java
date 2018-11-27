@@ -95,6 +95,7 @@ public class ItemPageServiceImpl implements ItemPageService {
 
     @Override
     public boolean deleteItemPage(Long[] goodsIds) {
+        System.out.println("删除详情页");
         try {
             for (Long goodsId : goodsIds) {
                 // 删除文件夹中的文件
