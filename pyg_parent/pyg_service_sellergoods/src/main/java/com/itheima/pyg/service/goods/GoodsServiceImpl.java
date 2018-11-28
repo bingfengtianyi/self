@@ -22,6 +22,7 @@ import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -275,7 +276,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @param ids
      */
     @Override
-    public void delete(Long[] ids) {
+    public void delete(long[] ids) {
         Goods goods = new Goods();
         goods.setIsDelete("1");
         if (ids!=null&&ids.length>0){
@@ -297,5 +298,33 @@ public class GoodsServiceImpl implements GoodsService {
         //封装PageResult对象
         PageResult<Goods>   pageResult = new PageResult<>(page.getTotal(),page.getResult());
         return pageResult;
+    }
+
+    /*根据商品id查询库存列表*/
+    @Override
+    public List<Item> findItemList(long[] ids) {
+
+        List<Item> itemList = new ArrayList<>();
+        for (Long id : ids) {
+            ItemQuery query = new ItemQuery();
+            query.createCriteria().andGoodsIdEqualTo(id);
+            List<Item> Items = itemDao.selectByExample(query);
+            itemList.addAll(Items);
+        }
+        return itemList;
+    }
+    /*根据商品id查询库存得到库存id*/
+    @Override
+    public List<String> findItemIds(long[] ids) {
+        List<String> itemIds = new ArrayList<>();
+        for (Long id : ids) {
+            ItemQuery query = new ItemQuery();
+            query.createCriteria().andGoodsIdEqualTo(id);
+            List<Item> Items = itemDao.selectByExample(query);
+            for (Item Item : Items) {
+                itemIds.add(Item.getId()+"");
+            }
+        }
+        return itemIds;
     }
 }

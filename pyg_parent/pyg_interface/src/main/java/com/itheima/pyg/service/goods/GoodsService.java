@@ -4,6 +4,7 @@ import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.entity.vo.GoodsVo;
 import com.itheima.pyg.pojo.good.Goods;
+import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.order.Order;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public interface GoodsService {
      * 逻辑删除待审核商品
      * @param ids
      */
-    void delete(Long[] ids);
+    void delete(long[] ids);
 
     /**
      * 分页获取商品列表
@@ -73,4 +74,12 @@ public interface GoodsService {
      * @return
      */
     PageResult<Goods> getGoodsListByPage(Integer pageNum, Integer pageSize);
+
+    /**
+     * 根据商品id查询库存列表
+     * @return
+     */
+    List<Item> findItemList(long[] ids);
+
+    List<String> findItemIds(long[] ids);
 }

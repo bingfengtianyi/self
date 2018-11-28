@@ -22,7 +22,7 @@ public class ItemSearchServiceImpl  implements ItemSearchService {
     private SolrTemplate solrTemplate;
 
     @Resource
-    private RedisTemplate<String,Object>    redisTemplate;
+    private RedisTemplate<String,Object> redisTemplate;
 
     /**
      * 前台系统检索

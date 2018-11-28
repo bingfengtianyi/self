@@ -1,9 +1,11 @@
 package com.itheima.pyg.controller.goods;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import com.itheima.pyg.entity.PageResult;
 import com.itheima.pyg.entity.Result;
 import com.itheima.pyg.pojo.good.Goods;
+import com.itheima.pyg.pojo.item.Item;
 import com.itheima.pyg.pojo.order.Order;
 import com.itheima.pyg.service.goods.GoodsService;
 import com.itheima.pyg.service.page.ItemPageService;
@@ -18,6 +20,7 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
+import java.util.List;
 
 @RestController
 @RequestMapping("goods")
@@ -37,6 +40,12 @@ public class GoodsController {
 
     @Autowired
     private Destination topicPageDeleteDestination;
+
+    @Autowired
+    private Destination queueSolrDestination;
+
+    @Autowired
+    private Destination queueSolrDeleteDestination;
 
     @RequestMapping("genHtml")
     public void genHtml(long goodsId){
@@ -66,18 +75,35 @@ public class GoodsController {
     public Result   updateStatus(long[] ids,String status){
         try {
             goodsService.updateStatus(ids,status);
+            if ("1".equals(status)) {
+                /*审核成功,添加到索引库*/
+                List<Item> itemList=goodsService.findItemList(ids);
+                if (itemList != null && itemList.size() > 0) {
+                    final String itemJson = JSON.toJSONString(itemList);
+                    System.out.println("发送itemlist"+itemJson);
+                    jmsTemplate.send(queueSolrDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createTextMessage(itemJson);
+                        }
+                    });
+                } else {
+                    System.out.println("没有数据需要导入");
+                }
 
-            /*审核成功,生成静态详情页*/
-            for (final Long goodsId : ids) {
+                /*审核成功,生成静态详情页*/
+                for (final Long goodsId : ids) {
 
-                /*审核成功发送消息队列*/
-                jmsTemplate.send(topicPageDestination, new MessageCreator() {
-                    @Override
-                    public Message createMessage(Session session) throws JMSException {
-                        return session.createObjectMessage(goodsId);
-                    }
-                });
+                    /*审核成功发送消息队列*/
+                    jmsTemplate.send(topicPageDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createObjectMessage(goodsId);
+                        }
+                    });
+                }
             }
+
             return new Result(true,"操作成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,9 +117,21 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("delete")
-    public Result delete(final Long[] ids){
+    public Result delete(final long[] ids){
         try {
             goodsService.delete(ids);
+            /*删除商品,删除索引库*/
+            List<String> itemIds = goodsService.findItemIds(ids);
+                final String itemJson = JSON.toJSONString(itemIds);
+                System.out.println("发送itemIds集合"+itemJson);
+                jmsTemplate.send(queueSolrDeleteDestination, new MessageCreator() {
+                    @Override
+                    public Message createMessage(Session session) throws JMSException {
+                        return session.createTextMessage(itemJson);
+                    }
+                });
+
+
             /*删除商品,删除静态详情页*/
                 /*删除后发送消息队列*/
                 jmsTemplate.send(topicPageDeleteDestination, new MessageCreator() {
