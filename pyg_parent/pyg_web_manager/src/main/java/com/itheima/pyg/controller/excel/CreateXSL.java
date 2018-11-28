@@ -1,11 +1,19 @@
 package com.itheima.pyg.controller.excel;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.itheima.pyg.pojo.good.Brand;
 import com.itheima.pyg.pojo.good.Goods;
+import com.itheima.pyg.pojo.item.ItemCat;
 import com.itheima.pyg.pojo.order.Order;
+import com.itheima.pyg.pojo.specification.Specification;
+import com.itheima.pyg.pojo.template.TypeTemplate;
 import com.itheima.pyg.pojo.user.User;
+import com.itheima.pyg.service.brand.BrandService;
 import com.itheima.pyg.service.goods.GoodsService;
+import com.itheima.pyg.service.itemcat.ItemCatService;
 import com.itheima.pyg.service.order.OrderService;
+import com.itheima.pyg.service.spec.SpecificationService;
+import com.itheima.pyg.service.template.TypeTemplateService;
 import com.itheima.pyg.service.user.UserService;
 import com.itheima.pyg.util.ExcelUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +39,18 @@ public class CreateXSL {
 
     @Reference
     private UserService userService;
+
+    @Reference
+    private BrandService brandService;
+
+    @Reference
+    private SpecificationService specificationService;
+
+    @Reference
+    private TypeTemplateService typeTemplateService;
+
+    @Reference
+    private ItemCatService itemCatService;
 
     /**
      * 运营商后台 商品列表导出为excel
@@ -93,7 +114,7 @@ public class CreateXSL {
         Map<String, Object> map = new HashMap<>();
         try {
             //用工具类
-            String[][] data = ExcelUtils.readexcell("E:\\test.xls", 1);
+            String[][] data = ExcelUtils.readexcell("E:\\user.xls", 1);
             SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
             for (int i = 0; i < data.length; i++) {
                 User user = new User();
@@ -119,6 +140,103 @@ public class CreateXSL {
                 user.setBirthday(format.parse(data[i][19]));
                 user.setLastLoginTime(format.parse(data[i][20]));
                 userService.save(user);//这是一个添加方法，dao层写入sql语句即可
+            }
+            map.put("success", true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("errmsg", e.getMessage());
+        }
+
+        return map;
+    }
+
+    @RequestMapping("importexcelForBrand")
+    public Map<String, Object> importexcelForBrand(MultipartFile file) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            //用工具类
+            String[][] data = ExcelUtils.readexcell("E:\\brand.xls", 1);
+            for (int i = 0; i < data.length; i++) {
+                Brand brand = new Brand();
+                brand.setName(data[i][0]);
+                brand.setFirstChar(data[i][1]);
+                brandService.addBrand(brand);//这是一个添加方法，dao层写入sql语句即可
+            }
+            map.put("success", true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("errmsg", e.getMessage());
+        }
+
+        return map;
+    }
+
+    @RequestMapping("importexcelForSpec")
+    public Map<String, Object> importexcelForSpec(MultipartFile file) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            //用工具类
+            String[][] data = ExcelUtils.readexcell("E:\\spec.xls", 1);
+            for (int i = 0; i < data.length; i++) {
+                Specification specification = new Specification();
+                specification.setSpecName(data[i][0]);
+                specificationService.save(specification);
+                //这是一个添加方法，dao层写入sql语句即可
+            }
+            map.put("success", true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("errmsg", e.getMessage());
+        }
+
+        return map;
+    }
+
+    @RequestMapping("importexcelForTemplate")
+    public Map<String, Object> importexcelForTemplate(MultipartFile file) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            //用工具类
+            String[][] data = ExcelUtils.readexcell("E:\\template.xls", 1);
+            for (int i = 0; i < data.length; i++) {
+                TypeTemplate typeTemplate = new TypeTemplate();
+                typeTemplate.setName(data[i][0]);
+                typeTemplate.setSpecIds(data[i][1]);
+                typeTemplate.setBrandIds(data[i][2]);
+                typeTemplate.setCustomAttributeItems(data[i][3]);
+                typeTemplateService.add(typeTemplate);
+                //这是一个添加方法，dao层写入sql语句即可
+            }
+            map.put("success", true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("errmsg", e.getMessage());
+        }
+
+        return map;
+    }
+
+    @RequestMapping("importexcelForItemCat")
+    public Map<String, Object> importexcelForItemCat(MultipartFile file) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            //用工具类
+            String[][] data = ExcelUtils.readexcell("E:\\itemCat.xls", 1);
+            for (int i = 0; i < data.length; i++) {
+                ItemCat itemCat = new ItemCat();
+                itemCat.setParentId(Long.valueOf(data[i][0]));
+                itemCat.setName(data[i][1]);
+                itemCat.setTypeId(Long.valueOf(data[i][2]));
+                itemCatService.save(itemCat);
+                //这是一个添加方法，dao层写入sql语句即可
             }
             map.put("success", true);
 

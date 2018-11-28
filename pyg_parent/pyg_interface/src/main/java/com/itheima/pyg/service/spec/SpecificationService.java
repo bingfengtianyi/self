@@ -65,4 +65,10 @@ public interface SpecificationService {
      * @return
      */
     List<Map<String,String>> selectOptionList();
+
+    /**
+     * 运营商后台导入规格列表
+     * @param specification
+     */
+    void save(Specification specification);
 }

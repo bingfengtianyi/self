@@ -41,6 +41,10 @@
                                         <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="entity={};searchEntity={}"><i class="fa fa-file-o"></i> 新建</button>
                                         <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>           
                                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+										<form  enctype="multipart/form-data" method="post" action="../createXSL/importexcelForBrand.action">
+											<input type="file">
+											<input type="submit"    value="导入品牌数据">
+										</form>
                                     </div>
                                 </div>
                             </div>
